@@ -1,11 +1,45 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
   const colors = ['#FF0000', '#0000FF', '#008000', '#000000', '#800080'];
 
   const [colorDuration, setColorDuration] = useState(60);
   const [restDuration, setRestDuration] = useState(10);
-  const [randomizedColors, setRandomizedColors] = useState(colors);
+  const [randomizedColors, setRandomizedColors] = useState([...colors]);
+  const [isGameStarted, setIsGameStarted] = useState(false);
+  const [currentColorIndex, setCurrentColorIndex] = useState(0);
+  const [timer, setTimer] = useState(0);
+
+  useEffect(() => {
+    if (isGameStarted) {
+      setTimer(10);
+    }
+  }, [isGameStarted]);
+
+  const startGame = () => {
+    setRandomizedColors(shuffleArray([...colors]));
+    setIsGameStarted(true);
+  };
+
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
+  if (isGameStarted) {
+    return (
+      <div
+        className={`min-h-dvh bg-[${randomizedColors[currentColorIndex]}] flex flex-col items-center justify-end gap-4 p-5`}>
+        <div className="bg-white bg-opacity-55 flex flex-col items-center gap-2 p-5 text-black rounded-xl">
+          <p className="font-bold text-3xl">Temps restant</p>
+          <span className="font-semibold text-3xl">{timer} sec.</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-dvh flex flex-col items-center justify-center gap-4">
@@ -56,7 +90,9 @@ function App() {
           onChange={({ target }) => setRestDuration(target.value)}
         />
       </div>
-      <button className="btn btn-primary btn-lg">
+      <button
+        className="btn border border-white bg-gradient-to-r from-[#e79999] via-[#5858e9] to-[#55d855] text-transparent bg-clip-text btn-lg"
+        onClick={startGame}>
         Démarrer Switch&apos;It
       </button>
     </div>
