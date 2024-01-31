@@ -73,7 +73,7 @@ function App() {
 
   const startGame = () => {
     setRandomizedColors(shuffleArray([...colors]));
-    setTimer(restDuration > 0 ? 5 : colorDuration);
+    setTimer(restDuration ? 3 : colorDuration);
     setIsColorTimer(false);
     setCurrentColorIndex(0);
     setIsGameStarted(true);
@@ -94,12 +94,17 @@ function App() {
             />
           </>
         )}
-        {!isColorTimer && (
+        {!isColorTimer && currentColorIndex === 0 ? (
+          <Timer
+            timer={timer}
+            text={'La partie démarre dans'}
+          />
+        ) : !isColorTimer && currentColorIndex !== 0 ? (
           <Timer
             timer={timer}
             text={'Prochaine couleur dans'}
           />
-        )}
+        ) : null}
         <Logo />
         <GradientButton
           onClick={() => {
