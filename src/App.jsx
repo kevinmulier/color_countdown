@@ -74,9 +74,9 @@ function App() {
 
   if (isGameStarted && isColorTimer) {
     return (
-      <div className={`min-h-dvh flex flex-col items-center gap-5 pb-5`}>
+      <div className={`min-h-dvh flex flex-col items-center gap-5 p-2`}>
         <div
-          className={`bg-[${randomizedColors[currentColorIndex]}] w-full flex-1`}></div>
+          className={`bg-[${randomizedColors[currentColorIndex]}] w-full max-w-2xl flex-1 rounded-3xl`}></div>
         <div className="flex flex-col items-center gap-2">
           <p className="font-bold text-4xl text-center">Temps restant</p>
           <span className="font-semibold text-6xl text-center uppercase">
