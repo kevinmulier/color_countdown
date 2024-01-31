@@ -59,7 +59,7 @@ function App() {
 
   const startGame = () => {
     setRandomizedColors(shuffleArray([...colors]));
-    setTimer(restDuration || colorDuration);
+    setTimer(restDuration > 0 ? 5 : colorDuration);
     setIsColorTimer(false);
     setIsGameStarted(true);
   };
@@ -79,8 +79,8 @@ function App() {
           src="/adaptamove.png"
           alt="Adapta'move Nancy"
         />
-        <h1 className="text-5xl font-bold bg-gradient-to-r from-[#e79999] via-[#5858e9] to-[#55d855] inline-block text-transparent bg-clip-text text-center">
-          SWITCH&apos;IT
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-[#e79999] via-[#5858e9] to-[#55d855] inline-block text-transparent bg-clip-text text-center">
+          ADAPTA&apos;COLOR
         </h1>
         <div
           className={`bg-[${randomizedColors[currentColorIndex]}] w-64 h-64 rounded-lg`}></div>
@@ -106,12 +106,12 @@ function App() {
           src="/adaptamove.png"
           alt="Adapta'move Nancy"
         />
-        <h1 className="text-5xl font-bold bg-gradient-to-r from-[#e79999] via-[#5858e9] to-[#55d855] inline-block text-transparent bg-clip-text text-center">
-          SWITCH&apos;IT
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-[#e79999] via-[#5858e9] to-[#55d855] inline-block text-transparent bg-clip-text text-center">
+          ADAPTA&apos;COLOR
         </h1>
         <div className="flex flex-col items-center gap-2">
           <p className="font-bold text-2xl text-center">
-            Temps restant avant la prochaine couleur
+            Prochaine couleur dans
           </p>
           <span className="font-semibold text-6xl text-center uppercase">
             {timer} sec.
@@ -132,8 +132,8 @@ function App() {
         src="/adaptamove.png"
         alt="Adapta'move Nancy"
       />
-      <h1 className="text-5xl font-bold bg-gradient-to-r from-[#e79999] via-[#5858e9] to-[#55d855] inline-block text-transparent bg-clip-text text-center">
-        SWITCH&apos;IT
+      <h1 className="text-4xl font-bold bg-gradient-to-r from-[#e79999] via-[#5858e9] to-[#55d855] inline-block text-transparent bg-clip-text text-center">
+        ADAPTA&apos;COLOR
       </h1>
       <h3 className="text-center font-semibold text-lg">Liste des couleurs</h3>
       <div className="flex flex-wrap justify-center gap-3">
