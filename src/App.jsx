@@ -75,7 +75,7 @@ function App() {
   if (isGameStarted && isColorTimer) {
     return (
       <div
-        className={`min-h-dvh flex flex-col items-center justify-center gap-5 p-5`}>
+        className={`min-h-dvh flex flex-col items-center justify-center gap-5 py-5`}>
         <img
           src="/adaptamove.png"
           alt="Adapta'move Nancy"
@@ -98,7 +98,7 @@ function App() {
   if (isGameStarted && !isColorTimer) {
     return (
       <div
-        className={`min-h-dvh flex flex-col items-center justify-center gap-5 p-5`}>
+        className={`min-h-dvh flex flex-col items-center justify-center gap-5 py-5`}>
         <img
           src="/adaptamove.png"
           alt="Adapta'move Nancy"
@@ -119,7 +119,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-dvh flex flex-col items-center justify-center gap-5 p-5">
+    <div className="min-h-dvh flex flex-col items-center justify-center gap-5 py-5">
       <img
         src="/adaptamove.png"
         alt="Adapta'move Nancy"
