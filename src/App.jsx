@@ -74,24 +74,22 @@ function App() {
 
   if (isGameStarted && isColorTimer) {
     return (
-      <div className={`min-h-dvh flex flex-col items-center gap-5 py-5`}>
-        <img
-          src="/adaptamove.png"
-          alt="Adapta'move Nancy"
-        />
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-[#e79999] via-[#5858e9] to-[#55d855] inline-block text-transparent bg-clip-text text-center">
-          ADAPTA&apos;COLOR
-        </h1>
+      <div className={`min-h-dvh flex flex-col items-center gap-5 pb-5`}>
         <div
-          className={`bg-[${randomizedColors[currentColorIndex]}] w-64 h-64 rounded-lg`}></div>
+          className={`bg-[${randomizedColors[currentColorIndex]}] w-full flex-1`}></div>
         <div className="flex flex-col items-center gap-2">
           <p className="font-bold text-4xl text-center">Temps restant</p>
           <span className="font-semibold text-6xl text-center uppercase">
             {timer} sec.
           </span>
         </div>
+        <img
+          src="/adaptamove.png"
+          alt="Adapta'move Nancy"
+          className="mt-auto"
+        />
         <button
-          className="btn border border-white bg-gradient-to-r from-[#ffa5a5] via-[#8787ff] to-[#51f851] text-transparent bg-clip-text btn-lg text-2xl font-bold uppercase mt-auto no-animation"
+          className="btn border border-white bg-gradient-to-r from-[#ffa5a5] via-[#8787ff] to-[#51f851] text-transparent bg-clip-text btn-lg text-2xl font-bold uppercase no-animation"
           onClick={() => setIsGameStarted(false)}>
           Quitter la partie
         </button>
@@ -102,14 +100,7 @@ function App() {
   if (isGameStarted && !isColorTimer) {
     return (
       <div className={`min-h-dvh flex flex-col items-center gap-5 py-5`}>
-        <img
-          src="/adaptamove.png"
-          alt="Adapta'move Nancy"
-        />
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-[#e79999] via-[#5858e9] to-[#55d855] inline-block text-transparent bg-clip-text text-center">
-          ADAPTA&apos;COLOR
-        </h1>
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex flex-col items-center gap-2 my-auto">
           <p className="font-bold text-2xl text-center">
             Prochaine couleur dans
           </p>
@@ -117,8 +108,13 @@ function App() {
             {timer} sec.
           </span>
         </div>
+        <img
+          src="/adaptamove.png"
+          alt="Adapta'move Nancy"
+          className="mt-auto"
+        />
         <button
-          className="btn border border-white bg-gradient-to-r from-[#ffa5a5] via-[#8787ff] to-[#51f851] text-transparent bg-clip-text btn-lg text-2xl font-bold uppercase mt-auto no-animation"
+          className="btn border border-white bg-gradient-to-r from-[#ffa5a5] via-[#8787ff] to-[#51f851] text-transparent bg-clip-text btn-lg text-2xl font-bold uppercase no-animation"
           onClick={() => setIsGameStarted(false)}>
           Quitter la partie
         </button>
