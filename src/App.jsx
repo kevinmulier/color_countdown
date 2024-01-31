@@ -83,11 +83,14 @@ function App() {
             {timer} sec.
           </span>
         </div>
-        <img
-          src="/adaptamove.png"
-          alt="Adapta'move Nancy"
-          className="mt-auto"
-        />
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-[#e79999] via-[#5858e9] to-[#55d855] inline-block text-transparent bg-clip-text text-center flex items-center gap-2 mt-auto">
+          <img
+            src="/adaptacolor_logo.png"
+            alt="adapta'color"
+            className="max-w-16 rounded-full"
+          />
+          ADAPTA&apos;COLOR
+        </h1>
         <button
           className="btn border border-white bg-gradient-to-r from-[#ffa5a5] via-[#8787ff] to-[#51f851] text-transparent bg-clip-text btn-lg text-2xl font-bold uppercase no-animation"
           onClick={() => setIsGameStarted(false)}>
@@ -108,11 +111,14 @@ function App() {
             {timer} sec.
           </span>
         </div>
-        <img
-          src="/adaptamove.png"
-          alt="Adapta'move Nancy"
-          className="mt-auto"
-        />
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-[#e79999] via-[#5858e9] to-[#55d855] inline-block text-transparent bg-clip-text text-center flex items-center gap-2 mt-auto">
+          <img
+            src="/adaptacolor_logo.png"
+            alt="adapta'color"
+            className="max-w-16 rounded-full"
+          />
+          ADAPTA&apos;COLOR
+        </h1>
         <button
           className="btn border border-white bg-gradient-to-r from-[#ffa5a5] via-[#8787ff] to-[#51f851] text-transparent bg-clip-text btn-lg text-2xl font-bold uppercase no-animation"
           onClick={() => setIsGameStarted(false)}>
@@ -124,11 +130,12 @@ function App() {
 
   return (
     <div className="min-h-dvh flex flex-col items-center gap-5 py-5">
-      <img
-        src="/adaptamove.png"
-        alt="Adapta'move Nancy"
-      />
-      <h1 className="text-4xl font-bold bg-gradient-to-r from-[#e79999] via-[#5858e9] to-[#55d855] inline-block text-transparent bg-clip-text text-center">
+      <h1 className="text-3xl font-bold bg-gradient-to-r from-[#e79999] via-[#5858e9] to-[#55d855] inline-block text-transparent bg-clip-text text-center flex items-center gap-2">
+        <img
+          src="/adaptacolor_logo.png"
+          alt="adapta'color"
+          className="max-w-16 rounded-full"
+        />
         ADAPTA&apos;COLOR
       </h1>
       <h3 className="text-center font-semibold text-lg">Liste des couleurs</h3>
@@ -180,7 +187,7 @@ function App() {
         />
       </div>
       <button
-        className="btn border border-white bg-gradient-to-r from-[#ffa5a5] via-[#8787ff] to-[#51f851] text-transparent bg-clip-text btn-lg text-2xl font-bold uppercase"
+        className="btn border border-white bg-gradient-to-r from-[#e79999] via-[#5858e9] to-[#55d855] text-transparent bg-clip-text btn-lg text-2xl font-bold uppercase"
         onClick={startGame}>
         Lancer la partie
       </button>
