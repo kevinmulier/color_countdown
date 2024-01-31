@@ -8,16 +8,50 @@ function App() {
   const [randomizedColors, setRandomizedColors] = useState([...colors]);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [currentColorIndex, setCurrentColorIndex] = useState(0);
-  const [timer, setTimer] = useState(0);
+  const [timer, setTimer] = useState(restDuration);
+  const [isColorTimer, setIsColorTimer] = useState(false);
 
   useEffect(() => {
+    let interval;
     if (isGameStarted) {
-      setTimer(10);
+      interval = setInterval(() => {
+        setTimer((prevTimer) => {
+          if (prevTimer === 1) {
+            // If the current timer is for color, move to the next color
+            if (isColorTimer) {
+              setCurrentColorIndex((prevIndex) => {
+                if (prevIndex >= randomizedColors.length - 1) {
+                  // Stop the game if all colors are shown
+                  clearInterval(interval);
+                  setIsGameStarted(false);
+                  setCurrentColorIndex(0);
+                  return prevIndex;
+                }
+                return prevIndex + 1;
+              });
+            }
+            // Switch between rest and color timer
+            setIsColorTimer(!isColorTimer);
+            return isColorTimer ? restDuration : colorDuration;
+          } else {
+            return prevTimer - 1;
+          }
+        });
+      }, 1000);
     }
-  }, [isGameStarted]);
+
+    return () => clearInterval(interval);
+  }, [
+    isGameStarted,
+    isColorTimer,
+    colorDuration,
+    restDuration,
+    randomizedColors.length,
+  ]);
 
   const startGame = () => {
     setRandomizedColors(shuffleArray([...colors]));
+    setTimer(5);
     setIsGameStarted(true);
   };
 
@@ -29,24 +63,62 @@ function App() {
     return array;
   };
 
-  if (isGameStarted) {
+  if (isGameStarted && isColorTimer) {
     return (
       <div
-        className={`min-h-dvh bg-[${randomizedColors[currentColorIndex]}] flex flex-col items-center justify-end gap-4 p-5`}>
-        <div className="bg-white bg-opacity-55 flex flex-col items-center gap-2 p-5 text-black rounded-xl">
-          <p className="font-bold text-3xl">Temps restant</p>
-          <span className="font-semibold text-3xl">{timer} sec.</span>
+        className={`min-h-dvh flex flex-col items-center justify-center gap-12 p-5`}>
+        <img
+          src="/adaptamove.png"
+          alt="Adapta'move Nancy"
+        />
+        <h1 className="text-5xl font-bold bg-gradient-to-r from-[#e79999] via-[#5858e9] to-[#55d855] inline-block text-transparent bg-clip-text text-center">
+          SWITCH&apos;IT
+        </h1>
+        <div
+          className={`bg-[${randomizedColors[currentColorIndex]}] w-64 h-64 rounded-lg`}></div>
+        <div className="flex flex-col items-center gap-2">
+          <p className="font-bold text-4xl text-center">Temps restant</p>
+          <span className="font-semibold text-6xl text-center uppercase">
+            {timer} sec.
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  if (isGameStarted && !isColorTimer) {
+    return (
+      <div
+        className={`min-h-dvh flex flex-col items-center justify-center gap-12 p-5`}>
+        <img
+          src="/adaptamove.png"
+          alt="Adapta'move Nancy"
+        />
+        <h1 className="text-5xl font-bold bg-gradient-to-r from-[#e79999] via-[#5858e9] to-[#55d855] inline-block text-transparent bg-clip-text text-center">
+          SWITCH&apos;IT
+        </h1>
+        <div className="flex flex-col items-center gap-2">
+          <p className="font-bold text-2xl text-center">
+            Temps restant avant la prochaine couleur
+          </p>
+          <span className="font-semibold text-6xl text-center uppercase">
+            {timer} sec.
+          </span>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-dvh flex flex-col items-center justify-center gap-4">
-      <h1 className="text-4xl font-bold bg-gradient-to-r from-[#e79999] via-[#5858e9] to-[#55d855] inline-block text-transparent bg-clip-text">
+    <div className="min-h-dvh flex flex-col items-center justify-center gap-6">
+      <img
+        src="/adaptamove.png"
+        alt="Adapta'move Nancy"
+      />
+      <h1 className="text-5xl font-bold bg-gradient-to-r from-[#e79999] via-[#5858e9] to-[#55d855] inline-block text-transparent bg-clip-text text-center">
         SWITCH&apos;IT
       </h1>
-      <h3 className="text-center">Liste des couleurs</h3>
+      <h3 className="text-center font-semibold text-lg">Liste des couleurs</h3>
       <div className="flex flex-wrap justify-center gap-3">
         {colors.map((color) => {
           const bgColor = `bg-[${color}]`;
@@ -66,34 +138,34 @@ function App() {
         <label
           htmlFor="color-duration"
           className="text-center font-semibold text-lg">
-          Durée par couleur (secondes)
+          Durée par couleur (sec.)
         </label>
         <input
           id="color-duration"
           className="input input-bordered text-center max-w-24"
           type="number"
           value={colorDuration}
-          onChange={({ target }) => setColorDuration(target.value)}
+          onChange={({ target }) => setColorDuration(Number(target.value))}
         />
       </div>
       <div className="max-w-fit flex flex-col items-center mx-auto gap-2">
         <label
           htmlFor="rest-duration"
           className="text-center font-semibold text-lg">
-          Durée entre les couleurs (secondes)
+          Durée entre les couleurs (sec.)
         </label>
         <input
           id="rest-duration"
           className="input input-bordered text-center max-w-24"
           type="number"
           value={restDuration}
-          onChange={({ target }) => setRestDuration(target.value)}
+          onChange={({ target }) => setRestDuration(Number(target.value))}
         />
       </div>
       <button
-        className="btn border border-white bg-gradient-to-r from-[#e79999] via-[#5858e9] to-[#55d855] text-transparent bg-clip-text btn-lg"
+        className="btn border border-white bg-gradient-to-r from-[#ffa5a5] via-[#8787ff] to-[#51f851] text-transparent bg-clip-text btn-lg text-2xl font-bold uppercase"
         onClick={startGame}>
-        Démarrer Switch&apos;It
+        Lancer la partie
       </button>
     </div>
   );
