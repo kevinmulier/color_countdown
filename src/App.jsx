@@ -13,10 +13,13 @@ function App() {
 
   useEffect(() => {
     let interval;
+    if (restDuration == 0) {
+      setIsColorTimer(true);
+    }
     if (isGameStarted) {
       interval = setInterval(() => {
         setTimer((prevTimer) => {
-          if (prevTimer === 1) {
+          if (prevTimer <= 1) {
             // If the current timer is for color, move to the next color
             if (isColorTimer) {
               setCurrentColorIndex((prevIndex) => {
@@ -31,8 +34,13 @@ function App() {
               });
             }
             // Switch between rest and color timer
-            setIsColorTimer(!isColorTimer);
-            return isColorTimer ? restDuration : colorDuration;
+            if (restDuration != 0) {
+              setIsColorTimer(!isColorTimer);
+              return isColorTimer ? restDuration : colorDuration;
+            } else {
+              setIsColorTimer(true);
+              return colorDuration;
+            }
           } else {
             return prevTimer - 1;
           }
@@ -51,7 +59,8 @@ function App() {
 
   const startGame = () => {
     setRandomizedColors(shuffleArray([...colors]));
-    setTimer(5);
+    setTimer(restDuration || colorDuration);
+    setIsColorTimer(false);
     setIsGameStarted(true);
   };
 
@@ -110,7 +119,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-dvh flex flex-col items-center justify-center gap-6">
+    <div className="min-h-dvh flex flex-col items-center justify-center gap-5 p-5">
       <img
         src="/adaptamove.png"
         alt="Adapta'move Nancy"
@@ -144,8 +153,10 @@ function App() {
           id="color-duration"
           className="input input-bordered text-center max-w-24"
           type="number"
-          value={colorDuration}
-          onChange={({ target }) => setColorDuration(Number(target.value))}
+          value={Number(colorDuration).toString()}
+          onChange={({ target }) =>
+            setColorDuration(parseInt(target.value, 10) || 0)
+          }
         />
       </div>
       <div className="max-w-fit flex flex-col items-center mx-auto gap-2">
@@ -158,8 +169,10 @@ function App() {
           id="rest-duration"
           className="input input-bordered text-center max-w-24"
           type="number"
-          value={restDuration}
-          onChange={({ target }) => setRestDuration(Number(target.value))}
+          value={Number(restDuration).toString()}
+          onChange={({ target }) =>
+            setRestDuration(parseInt(target.value, 10) || 0)
+          }
         />
       </div>
       <button
