@@ -74,8 +74,7 @@ function App() {
 
   if (isGameStarted && isColorTimer) {
     return (
-      <div
-        className={`min-h-dvh flex flex-col items-center justify-center gap-5 py-5`}>
+      <div className={`min-h-dvh flex flex-col items-center gap-5 py-5`}>
         <img
           src="/adaptamove.png"
           alt="Adapta'move Nancy"
@@ -91,14 +90,18 @@ function App() {
             {timer} sec.
           </span>
         </div>
+        <button
+          className="btn border border-white bg-gradient-to-r from-[#ffa5a5] via-[#8787ff] to-[#51f851] text-transparent bg-clip-text btn-lg text-2xl font-bold uppercase mt-auto no-animation"
+          onClick={() => setIsGameStarted(false)}>
+          Quitter la partie
+        </button>
       </div>
     );
   }
 
   if (isGameStarted && !isColorTimer) {
     return (
-      <div
-        className={`min-h-dvh flex flex-col items-center justify-center gap-5 py-5`}>
+      <div className={`min-h-dvh flex flex-col items-center gap-5 py-5`}>
         <img
           src="/adaptamove.png"
           alt="Adapta'move Nancy"
@@ -114,12 +117,17 @@ function App() {
             {timer} sec.
           </span>
         </div>
+        <button
+          className="btn border border-white bg-gradient-to-r from-[#ffa5a5] via-[#8787ff] to-[#51f851] text-transparent bg-clip-text btn-lg text-2xl font-bold uppercase mt-auto no-animation"
+          onClick={() => setIsGameStarted(false)}>
+          Quitter la partie
+        </button>
       </div>
     );
   }
 
   return (
-    <div className="min-h-dvh flex flex-col items-center justify-center gap-5 py-5">
+    <div className="min-h-dvh flex flex-col items-center gap-5 py-5">
       <img
         src="/adaptamove.png"
         alt="Adapta'move Nancy"
